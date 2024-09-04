@@ -32,19 +32,31 @@ function reciveEvent() {
 }
 
 function makeAGuess() {
-    let guess = Math.floor(Math.random() * (highInBound - lowInBound + 1)) + lowInBound;
+    let guess = Math.floor((highInBound - lowInBound)/2) + lowInBound;
     outPutResult(`I am guessing ${guess}`)
     return guess;
 }
 
 function guessIsTooLow(){
-    lowInBound = currentGuess + 1;
-    currentGuess = makeAGuess();
+    if (currentGuess < highInBound) {
+        lowInBound = currentGuess + 1;
+        currentGuess = makeAGuess();
+        outPutResult("you guess was too low");
+        if (lowInBound >= highInBound) {
+            outPutResult("You are cheating!")
+        }
+    }
 }
 
 function guessIsTooHigh(){
-    highInBound = currentGuess - 1;
-    currentGuess = makeAGuess();
+    if (currentGuess > lowInBound) {
+        highInBound = currentGuess - 1;
+        currentGuess = makeAGuess();
+        outPutResult("you guess was too high");
+        if (lowInBound >= highInBound) {
+            outPutResult("You are cheating!")
+        }
+    }
 }
 
 function guessCorrect() {
